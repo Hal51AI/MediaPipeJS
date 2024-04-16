@@ -1,11 +1,16 @@
 import { Camera } from '@mediapipe/camera_utils';
 import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
 
-const videoElement = document.getElementsByClassName('input_video')[0];
-const canvasElement = document.getElementsByClassName('output_canvas')[0];
+const videoElement = document.getElementsByClassName('inputVideo')[0];
+const canvasElement = document.getElementsByClassName('outputCanvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
+const button = document.getElementsByClassName('startCamera')[0];
+const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
+    return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
+}});
 
-function onResults(results) {
+selfieSegmentation.setOptions({modelSelection: 1});
+selfieSegmentation.onResults(results => {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
@@ -22,21 +27,20 @@ function onResults(results) {
     canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
     canvasCtx.restore();
-}
-
-const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
-    return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
-}});
-
-selfieSegmentation.setOptions({modelSelection: 1});
-selfieSegmentation.onResults(onResults);
-
-const camera = new Camera(videoElement, {
-    onFrame: async () => {
-        await selfieSegmentation.send({image: videoElement});
-    },
-    width: 1280,
-    height: 720
 });
 
-camera.start();
+button.onclick = () => {
+    let selectedCamera = document.querySelector('input[name="cameraSelection"]:checked').value;
+    let inputs = document.querySelector('.inputs');
+    let camera = new Camera(videoElement, {
+        onFrame: async () => {
+            await selfieSegmentation.send({image: videoElement});
+        },
+        facingMode: selectedCamera,
+        width: 1280,
+        height: 720,
+
+    });
+    camera.start();
+    inputs.style.display = 'none'; 
+};

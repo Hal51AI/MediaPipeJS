@@ -10,18 +10,32 @@
 </head>
 
 <body>
-    <button>Segment</button>
-  <div class="container">
-    <video class="input_video" style="display:none"></video>
-    <canvas class="output_canvas" width="1280px" height="720px"></canvas>
-  </div>
-  <script type="module">
-    const videoElement = document.getElementsByClassName('input_video')[0];
-    const canvasElement = document.getElementsByClassName('output_canvas')[0];
-    const canvasCtx = canvasElement.getContext('2d');
-    const button = document.getElementsByTagName('button')[0];
+  <div class="container inputs">
+    <input type="radio" id="frontCamera" name="cameraSelection" value="user" checked />
+    <label for="frontCamera">Front Camera</label>
 
-    function onResults(results) {
+    <input type="radio" id="backCamera" name="cameraSelection" value="environment" />
+    <label for="backCamera">Back Camera</label>
+
+    <button class="startCamera">Start Camera</button>
+  </div>
+  <div class="container">
+    <video class="inputVideo" style="display:none"></video>
+    <canvas class="outputCanvas" width="1280px" height="720px"></canvas>
+  </div>
+
+  <script type="module">
+    const videoElement = document.getElementsByClassName('inputVideo')[0];
+    const canvasElement = document.getElementsByClassName('outputCanvas')[0];
+    const canvasCtx = canvasElement.getContext('2d');
+    const button = document.getElementsByClassName('startCamera')[0];
+
+    const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
+    }});
+
+    selfieSegmentation.setOptions({modelSelection: 1});
+    selfieSegmentation.onResults(results => {
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
@@ -38,25 +52,22 @@
         canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
         canvasCtx.restore();
-    }
-
-    const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
-    }});
-
-    selfieSegmentation.setOptions({modelSelection: 1});
-    selfieSegmentation.onResults(onResults);
-
-    const camera = new Camera(videoElement, {
-        onFrame: async () => {
-            await selfieSegmentation.send({image: videoElement});
-        },
-        width: 1280,
-        height: 720
     });
 
     button.onclick = () => {
+      let selectedCamera = document.querySelector('input[name="cameraSelection"]:checked').value;
+      let inputs = document.querySelector('.inputs');
+      let camera = new Camera(videoElement, {
+          onFrame: async () => {
+              await selfieSegmentation.send({image: videoElement});
+          },
+          facingMode: selectedCamera,
+          width: 1280,
+          height: 720,
+
+      });
       camera.start();
+      inputs.style.display = 'none'; 
     };
 
   </script>

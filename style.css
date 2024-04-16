@@ -2,3 +2,8 @@
 body {
     background-color: black;
 }
+
+label[for="frontCamera"],
+label[for="backCamera"] {
+    color: white;
+}

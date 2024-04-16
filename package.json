@@ -1,0 +1,23 @@
+{
+  "name": "mediapipejs",
+  "version": "1.0.0",
+  "description": "Mediapipe for selfiesegmentation",
+  "main": "app.js",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sang Han",
+  "license": "ISC",
+  "dependencies": {
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/control_utils": "^0.6.1675466023",
+    "@mediapipe/drawing_utils": "^0.3.1675466124",
+    "@mediapipe/selfie_segmentation": "^0.1.1675465747"
+  },
+  "devDependencies": {
+    "vite": "^5.2.8"
+  }
+}

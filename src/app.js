@@ -1,10 +1,12 @@
 import { Camera } from '@mediapipe/camera_utils';
 import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
+import * as css from "./style.css";
 
 const videoElement = document.getElementsByClassName('inputVideo')[0];
 const canvasElement = document.getElementsByClassName('outputCanvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 const button = document.getElementsByClassName('startCamera')[0];
+
 const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
 }});
@@ -29,7 +31,7 @@ selfieSegmentation.onResults(results => {
     canvasCtx.restore();
 });
 
-button.onclick = () => {
+button.addEventListener('click', () => {
     let selectedCamera = document.querySelector('input[name="cameraSelection"]:checked').value;
     let inputs = document.querySelector('.inputs');
     let camera = new Camera(videoElement, {
@@ -43,4 +45,4 @@ button.onclick = () => {
     });
     camera.start();
     inputs.style.display = 'none'; 
-};
+});

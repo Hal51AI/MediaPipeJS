@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../src/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container inputs">
+    <input type="radio" id="frontCamera" name="cameraSelection" value="user" checked />
+    <label for="frontCamera">Front Camera</label>
+
+    <input type="radio" id="backCamera" name="cameraSelection" value="environment" />
+    <label for="backCamera">Back Camera</label>
+
+    <button class="startCamera">Start Camera</button>
+  </div>
+  <div class="container">
+    <video class="inputVideo" style="display:none"></video>
+    <canvas class="outputCanvas" width="1280px" height="720px"></canvas>
+  </div>
+
+  <script src="../src/app.js" type="module"></script>
+</body>
+</html>

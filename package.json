@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
   "author": "Sang Han",
   "license": "ISC",
@@ -14,7 +13,8 @@
     "@mediapipe/camera_utils": "^0.3.1675466862",
     "@mediapipe/control_utils": "^0.6.1675466023",
     "@mediapipe/drawing_utils": "^0.3.1675466124",
-    "@mediapipe/selfie_segmentation": "^0.1.1675465747"
+    "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+    "screenfull": "^6.0.2"
   },
   "devDependencies": {
     "css-loader": "^7.1.1",

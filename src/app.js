@@ -1,11 +1,14 @@
 import { Camera } from '@mediapipe/camera_utils';
 import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
+import screenfull from 'screenfull';
+
 import * as css from "./style.css";
 
 const videoElement = document.getElementsByClassName('inputVideo')[0];
 const canvasElement = document.getElementsByClassName('outputCanvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 const button = document.getElementsByClassName('startCamera')[0];
+const fullscreenButton = document.getElementById('fullscreen-button');
 
 const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
@@ -45,4 +48,10 @@ button.addEventListener('click', () => {
     });
     camera.start();
     inputs.style.display = 'none'; 
+});
+
+fullscreenButton.addEventListener('click', (event) => {
+    if (screenfull.isEnabled) {
+        screenfull.toggle(canvasElement, {navigationUI: 'hide'});
+    }
 });

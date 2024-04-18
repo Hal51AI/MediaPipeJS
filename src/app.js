@@ -48,6 +48,7 @@ button.addEventListener('click', () => {
     });
     camera.start();
     inputs.style.display = 'none'; 
+    canvasElement.style.display = '';
 });
 
 fullscreenButton.addEventListener('click', (event) => {

@@ -70,13 +70,13 @@ body {
 }
 
 button.startCamera {
-  margin: 20px;
+  margin: 15px;
   font-size: 1.2rem;
   width: 300px;
   padding: 1rem 2.5rem;
   border: none;
   outline: none;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   background-color: #fff;
   color: black;
@@ -97,6 +97,7 @@ button.startCamera:hover {
 }
 
 .inputs {
+  background-color: rgb(36, 36, 36);
   border: 1px solid #f7f3f3;
   padding: 20px;
   float: right;

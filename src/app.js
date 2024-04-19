@@ -51,13 +51,13 @@ button.addEventListener('click', () => {
     canvasElement.style.display = '';
 });
 
-fullscreenButton.addEventListener('click', (event) => {
+fullscreenButton.addEventListener('click', () => {
     if (screenfull.isEnabled) {
         screenfull.toggle(canvasElement, {navigationUI: 'hide'});
     }
 });
 
-document.addEventListener('click', (event) => {
+document.addEventListener('click', () => {
     if (screenfull.isEnabled && screenfull.isFullscreen) {
         screenfull.exit();
     }

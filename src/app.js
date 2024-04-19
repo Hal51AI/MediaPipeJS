@@ -35,7 +35,7 @@ selfieSegmentation.onResults(results => {
 });
 
 button.addEventListener('click', () => {
-    let selectedCamera = document.querySelector('input[name="cameraSelection"]:checked').value;
+    let selectedCamera = document.querySelector('input[name="radio"]:checked').value;
     let inputs = document.querySelector('.inputs');
     let camera = new Camera(videoElement, {
         onFrame: async () => {
@@ -54,5 +54,11 @@ button.addEventListener('click', () => {
 fullscreenButton.addEventListener('click', (event) => {
     if (screenfull.isEnabled) {
         screenfull.toggle(canvasElement, {navigationUI: 'hide'});
+    }
+});
+
+document.addEventListener('click', (event) => {
+    if (screenfull.isEnabled && screenfull.isFullscreen) {
+        screenfull.exit();
     }
 });

@@ -10,14 +10,20 @@
 </head>
 
 <body>
-  <div class="container inputs">
-    <input type="radio" id="frontCamera" name="cameraSelection" value="user" checked />
-    <label for="frontCamera">Front Camera</label>
-
-    <input type="radio" id="backCamera" name="cameraSelection" value="environment" />
-    <label for="backCamera">Back Camera</label>
-
-    <button class="startCamera">Start Camera</button>
+  <div class="inputs flex-container">
+    <div class="radio-inputs">
+      <label class="radio">
+        <input type="radio" name="radio" value="user" checked>
+        <span class="name">Front Camera</span>
+      </label>
+      <label class="radio">
+        <input type="radio" name="radio" value="environment">
+        <span class="name">Back Camera</span>
+      </label>
+    </div>
+    <div>
+      <button class="startCamera">Start Camera</button>
+    </div>
   </div>
 
   <div class="container">

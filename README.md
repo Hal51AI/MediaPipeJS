@@ -8,7 +8,7 @@ Clone the repository and install dependencies.
 
 ```bash
 $ git clone https://github.com/Hal51AI/MediaPipeJS.git
-$ cd GestureJS
+$ cd MediaPipeJS
 $ npm install
 ```
 

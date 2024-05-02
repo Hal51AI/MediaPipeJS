@@ -2,6 +2,8 @@
 
 This is a javascript application that uses the webcam to perform selfie segmentation.
 
+![page](./assets/ui.png)
+
 ## Installation
 
 Clone the repository and install dependencies.
